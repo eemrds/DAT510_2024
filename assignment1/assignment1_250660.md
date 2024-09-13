@@ -138,10 +138,23 @@ $$
 
 2 percent is just one character difference, meaning that there is no avalanche effect. A change of one character doesn't cascade and change more bits. It just changes that one letter of the in the cipher text. 
 
-
 ### 2.3. Analyze the Avalanche effect
 
+Additional rounds make no difference an terms of avalanche effect. Whenever the original and changed texts are re-encrypted the resulting avalanche effect is 2%, which means no avalanching. This comes down to how the transposition and substitution cipher works. The transposition rearranges and the substitution changes, but none of the characters depend on each other. If character number 1 is changed, the change cannot inflict any change on the different characters. The Caesar cipher only shifts a character based on a map and transposition rearranges the text, but character 1 is never part of deciding what, for instance, character 2 becomes. This is a big flaw in the way the methods act together, there is no confusion applied to the resulting cipher text. No matter how many times columnar or Caesar cipher is used, there will not be any resulting avalanche effect. 
+
+![image-20240913100210676](images/image-20240913100210676.png)
+
+> number of bits changes over consecutive rounds vs shows avalanche effect.
+
+Even increasing the change from 1 bit to 4 bits and running it through the same pipeline does increase the percentage, but only by a predictable factor of the same number. There is no cascading change in bits, only the the number that were manually changed.
+$$
+Avalanche\ effect = n * (\frac{num\ changed\ bits}{total\ number\ of\ bits} * 100) \approx n * 2.22
+$$
+This again leads us to the same conclusion that the lack of dependency between the character leads to no avalanche effect property on the cipher.
+
 ### 2.4. Optimize Avalanche Effect with Reasonable Computation
+
+
 
 ![image-20240913015333433](images/image-20240913015333433.png)
 
@@ -153,7 +166,7 @@ $$
 
 
 ## 4. Conclusion
-The effect of change that the combination of Caesar cipher and Columnar transposition cipher offered alone was little when compared with the inclusion of the CBC block ciphering method. As the ciphertext is generated, the Caesar substitution method acts independently on each character. Due to a lack of "interaction" between the characters during the substitution stage, similar plaintext's will create similar looking cipher texts. Columnar transposition might add some diffusion, but it is not very complex and it only reorders the characters. The combination of them does not apply confusion and diffusion to a satisfactory standard. The application of CBC, however does improve the result
+The effect of change that the combination of Caesar cipher and Columnar transposition cipher offered alone was little when compared with the inclusion of the CBC block ciphering method. As the ciphertext is generated, the Caesar substitution method acts independently on each character. Due to a lack of "interaction" between the characters during the substitution stage, similar plaintext's will create similar looking cipher texts. Columnar transposition might add some diffusion, but it is not very complex and it only reorders the characters. The combination of them does not apply confusion and diffusion to a satisfactory standard. The application of CBC, however does improve the result.
 
 ## References
 
